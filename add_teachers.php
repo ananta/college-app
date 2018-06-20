@@ -51,6 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
 
 <form method="post" action="">
+    <h1>Add Teachers</h1>
     <?php include('components/errors.php')?>
     <?php include('components/message.php')?>    
     <input type="text" name="fname" placeholder="First Name"/>
@@ -64,5 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </form>
 
 <?php
+// $currentPage = substr($currentPage,12);
+echo $currentPage;
 include('components/footer.php');
 ?>
