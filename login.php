@@ -15,14 +15,18 @@
     $username =  mysqli_real_escape_string($db,$_POST['username']);
     $password =  mysqli_real_escape_string($db,$_POST['password']);
     $password = md5($password);
-    $sql = "SELECT id FROM teacher WHERE username = '$username' and password = '$password'";
+    $sql = "SELECT * FROM teacher WHERE username = '$username' and password = '$password'";
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-    $active = $row['active'];
-      
-    $count = mysqli_num_rows($result);		
+    // $_SESSION['data'] = print_r($row,true);
+    $count = mysqli_num_rows($result);	
+    
       if($count == 1) {
          $_SESSION['login_user'] = $username;
+         $_SESSION['name'] = $row['first_name'] .' '. $row['last_name'];
+         $_SESSION['id'] = $row['id'];
+         $_SESSION['email'] = $row['email'];
+
          header("Location: home.php");
          $_SESSION['message'] = "Success ".$_SESSION['login_user'];
          exit;
