@@ -4,8 +4,8 @@
   include('components/header.php');
   if (!isset($_SESSION["login_user"]))
    {
-      header("location: login.php");
+      header("location: pages/login.php");
    }else{
-      header("location: home.php");
+      header("location: pages/home.php");
    }
 ?>
