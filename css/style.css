@@ -34,6 +34,7 @@ form {
 }
 
 input {
+	margin:20px;
 	font-size: 18px;
 	padding: 10px 10px 10px 5px;
 	-webkit-appearance: none;
@@ -46,7 +47,7 @@ input {
 	border-bottom: 1px solid #757575;
 }
 
-input:focus { outline: none; }
+input:focus { border-bottom: 2px solid #235F87; outline:none }
 
 
 /* Label */
@@ -206,19 +207,19 @@ header {
   header .menu {
 	color:black;
 	height:50px;
-	line-height:50px;
+	line-height: 50px;
+	text-align: center;
 	font-size:24px;
 	font-weight:bold;
 	float:left;
   }
-  header .menu h3 {
+  .brand {
 	  color:white;
 	  padding:0;
+	  text-decoration: none;
+	  margin:auto;
   }
-  header .menu {
-	  text-align: center;
-	  background-color: blue;
-  }
+
 
   header nav {
 	float:right;
@@ -241,12 +242,29 @@ header {
   
   header nav ul li a:hover {
 	background-color:#235F87;
+	transition-delay: 5s;
   }
+	
+  .active {
+	background-color:#235F87;
+	transition-delay: 1s;
+  }
+
+  .danger {
+	background-color:#FF5252;
+  }
+
 
   /* Errors & Messages */
   .error p{
-	  color: red;
+	  color: #FF5252;
   }
   .message p{
 	color: green;
+}
+
+/* Content */
+.content{
+	/* background-color: yellow; */
+	margin-top: 50px;
 }
