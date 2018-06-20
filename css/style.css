@@ -158,11 +158,12 @@ input:focus ~ .highlight {
 }
 
 .buttonGreen {
-	background: #8BC34A;
+	background: rgb(145, 207, 73);
 	text-shadow: 1px 1px 0 rgba(37, 155, 26, 0.5);
   }
   
 .buttonBlue:hover { background: #1d5377; }
+.buttonGreen:hover{background: rgb(119, 165, 66); }
 
 
 
@@ -199,7 +200,6 @@ header {
 	position:absolute;
 	top:0;
 	left:0;
-	padding:0 100px;
 	background:#262626;
 	width:100%;
 	box-sizing:border-box;
@@ -242,9 +242,12 @@ header {
   
   header nav ul li a:hover {
 	background-color:#235F87;
-	transition-delay: 5s;
+	transition-delay: 1s;
   }
-	
+  .inactive :hover {
+	background-color:#235F87;
+	transition-delay: 1s;
+  }	
   .active {
 	background-color:#235F87;
 	transition-delay: 1s;
@@ -265,6 +268,150 @@ header {
 
 /* Content */
 .content{
+	margin: 3em auto;
 	/* background-color: yellow; */
-	margin-top: 50px;
+	
 }
+
+/* Card */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+	border-radius: 5px;	
+	max-width: 400px;
+	background: white;
+	margin-left: 20px;
+}
+
+.teachersCard {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	transition: 0.3s;
+	background: white;
+	overflow: hidden;
+	border-radius: 10px;	
+	max-width: 300px;
+	padding:10px;
+	margin: 5px;
+}
+.cardTitle {
+	color: #2f2f2f;
+	font-size: 1.8em;
+	text-align:center;
+}
+.cardUsername {
+	color: gray;
+	text-align: center;
+}
+.cardEmail {
+	color: gray;
+	text-align: center;
+}
+.cardButton {
+	border: none;
+	outline: 0;
+	display: inline-block;
+	padding: 8px;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 100%;
+	font-size: 18px;	
+}
+
+.profileImg {
+	border-radius:20px;
+
+}
+
+
+/* Column */
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+	height: 700px;
+	margin: 0 auto;
+	justify-content: center;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 700px) {
+    .column {
+        width: 100%;
+	}
+
+}
+
+/* Hamburger Toggle */
+.toggle {
+	width:100%;
+	background: yellow;
+	text-align:right;
+	box-sizing: border-box;
+	display: none;
+}
+
+@media (max-width:760px){
+	.content {
+		margin: 6.5em auto;
+	}
+	.toggle {
+		display: none;
+	}
+	header nav {
+		float:center;
+	  }
+	  header nav ul {
+		margin:0;
+		padding:0;
+	  }
+	  header nav ul li {
+		width:100%;
+		float:left;
+
+	}
+	  header nav ul li a {
+		color:white;
+		text-decoration:none;
+	  }
+	  
+}
+
+/* Grid */
+
+.grid-container {
+	display: grid;
+	width:800px;	
+	grid-gap:10px;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: 600px 600px 300px;
+	grid-auto-flow: row;
+}
+.grid-item {
+	width:300px;
+	
+	height:510px;
+	padding:10px;
+  }
+
+
+  /* Heroic Header */
+  .heroic-header{
+	  background-color:#235F87;
+	  height:200px;
+	  line-height: 200px;
+	  width:100%;
+	  justify-content: center;
+	  text-align: center;
+  }
+
+  .heroic-title{
+	  color:#fff;
+  }
