@@ -242,15 +242,12 @@ header {
   
   header nav ul li a:hover {
 	background-color:#235F87;
-	transition-delay: 1s;
   }
   .inactive :hover {
 	background-color:#235F87;
-	transition-delay: 1s;
   }	
   .active {
 	background-color:#235F87;
-	transition-delay: 1s;
   }
 
   .danger {
@@ -367,36 +364,31 @@ header {
 	}
 	header nav {
 		float:center;
-	  }
-	  header nav ul {
-		margin:0;
-		padding:0;
-	  }
-	  header nav ul li {
-		width:100%;
-		float:left;
-
 	}
-	  header nav ul li a {
-		color:white;
-		text-decoration:none;
-	  }
-	  
+	header nav ul {
+	margin:0;
+	padding:0;
+	}
+	header nav ul li {
+	width:100%;
+	float:left;
+    }
+	header nav ul li a {
+	color:white;
+	text-decoration:none;
+	}
 }
 
 /* Grid */
 
 .grid-container {
 	display: grid;
-	width:800px;	
-	grid-gap:10px;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 	grid-template-rows: 600px 600px 300px;
 	grid-auto-flow: row;
 }
 .grid-item {
-	width:300px;
-	
+	width:300px;	
 	height:510px;
 	padding:10px;
   }
