@@ -47,6 +47,18 @@ input {
 	border-bottom: 1px solid #757575;
 }
 
+.formLabel {
+	margin:20px;
+	margin-bottom: -20px;
+	font-size: 18px;
+	padding: 10px 10px 1px 5px;
+	-webkit-appearance: none;
+	display: block;
+	background: #fafafa;
+	color: #636363;
+	width: 100%;
+	border: none;
+}
 textarea {
 	margin:20px;
 	font-size: 18px;
@@ -410,7 +422,7 @@ header {
 
 
   /* Heroic Header */
-  .heroic-header{
+  .heroic-header {
 	  background-color:#235F87;
 	  height:200px;
 	  line-height: 200px;
@@ -419,6 +431,24 @@ header {
 	  text-align: center;
   }
 
-  .heroic-title{
+  .heroic-title {
 	  color:#fff;
+  }
+
+  /* Events Page */
+  .eventImg {
+	background-color: #aaa;
+	width: 100%;
+	padding: 20px;
+  }
+
+  .eventCard {
+	background-color: white;
+	padding: 20px;
+	margin-top: 20px;
+  }
+  
+  events-container {
+	  width:75%;
+	  margin:4em;
   }
