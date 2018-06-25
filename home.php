@@ -15,7 +15,11 @@
         </div>
         <div class="column">
             <div class="homeGridMenu">
-                <div class="moduleItem"><a href="pages/admin/admin_teachers.php">Teachers</a></div>
+                <?php 
+                if($_SESSION["login_user"] == "admin"){
+                    echo '<div class="moduleItem"><a href="pages/admin/admin_teachers.php">Teachers</a></div>'; 
+                };  
+                ?>                
                 <div class="moduleItem"><a href="pages/admin/admin_events.php">Events</a></div>
                 <div class="moduleItem"><a href="pages/admin/admin_notices.php">Notices</a></div>
                 <div class="moduleItem"><a href="pages/admin/admin_result.php">Result</a></div>
