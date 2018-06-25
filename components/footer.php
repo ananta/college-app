@@ -1,4 +1,4 @@
 </div>
 <p style="color:gray; text-align:center">
-    Gandaki College Of Engineering & Science
+    Gandaki College Of Engineering And Science
 </p>
