@@ -26,7 +26,9 @@
          $_SESSION['name'] = $row['first_name'] .' '. $row['last_name'];
          $_SESSION['id'] = $row['id'];
          $_SESSION['email'] = $row['email'];
-
+        if($_SESSION['login_user'] == "admin"){
+          $_SESSION['isAdmin'] = true;
+        }
          header("Location: home.php");
          $_SESSION['message'] = "Success ".$_SESSION['login_user'];
          exit;

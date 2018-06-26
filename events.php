@@ -28,7 +28,9 @@
                 <h5 class="eventSubTitle"><img src="res/location_icon.png" style="width:15px;"> '.$row["event_venue"].'</h5>
                 <h5 class="eventTime"><img src="res/clock_icon.png" style="width:15px;"> '. $row["event_date"].'</h5>
                 <div class="eventImg">
-                    <img style="width:100%; height:200px;"src="'. ($row["event_image"] ? $row["event_image"] : "res/default_event.png") .'" alt="image">
+                    <a href="uploads/events/'. ($row["event_image"] ? $row["event_image"] : "default.png") .'">
+                    <img style="width:100%; height:200px;"src="uploads/events/'. ($row["event_image"] ? $row["event_image"] : "default.png") .'" alt="image">
+                    </a>
                 </div>
                 <p class="eventDetails">'.$row["event_description"].'</p>
                 <div style="height:2px; background-color:gray;"></div>

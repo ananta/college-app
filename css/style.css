@@ -299,8 +299,6 @@ header {
 
 /* Card */
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
 	border-radius: 5px;	
 	max-width: 400px;
 	background: white;
@@ -370,7 +368,6 @@ header {
     .column {
         width: 100%;
 	}
-
 }
 
 /* Hamburger Toggle */
@@ -572,7 +569,7 @@ header {
   }
 
 .controllableList ul li img{
-	border: 10px solid #fff; 
+	border: 5px solid #fff; 
   }
 .controllableList ul li h1{
 	font-size: 20px;

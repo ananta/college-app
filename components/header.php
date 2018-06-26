@@ -2,6 +2,7 @@
 	ob_start();
 	$currentPage = substr($_SERVER['REQUEST_URI'],12);
 	$mainPage= 'http://'.$_SERVER['SERVER_NAME']."/gcesServer/";
+	$mainLocation = $_SERVER['DOCUMENT_ROOT']."/gcesServer/";
 ?>
 
 <!DOCTYPE html>
@@ -9,8 +10,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login</title>
-      <link rel="stylesheet" href="<?php echo $mainPage?>css/style.css?load=<?php echo time();?>" type="text/css">
+	<title>Admin Login</title>
+	<link rel="stylesheet" href="<?php echo $mainPage?>css/style.css?load=<?php echo time();?>" type="text/css">
 </head>
 <body>
 <header>
@@ -38,7 +39,7 @@
 				<li><a class="'.($currentPage == "results.php" ? "active" : "inactive").'" href="'.$mainPage.'results.php">Result</a></li>
 				<li><a class="'.($currentPage == "add_events.php" ? "active" : "inactive").'"  href="'.$mainPage.'add_events.php">Events</a></li>
 				<li><a class="'.($currentPage == "notices.php" ? "active" : "inactive").'"  href="'.$mainPage.'notices.php">Notices</a></li>
-				<li><a class="danger" href="logout.php">Logout</a></li>
+				<li><a class="danger" href="'.$mainPage.'logout.php">Logout</a></li>
 			</ul>
 		</nav>	
 		';
