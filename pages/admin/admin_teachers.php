@@ -47,18 +47,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 }
 ?>
-
     <div class="heroic-header">
         <h1 class="heroic-title">Manage Teachers</h1>
     </div>
-
     <div class="row">
         <div class="column">
             <div class="minorCardHeader">
                 <h1>Add Teachers</h1>
             </div>
             <form method="post" action="">
-              
                 <?php include('../../components/errors.php')?>
                 <?php include('../../components/message.php')?>    
                 <input type="text" name="fname" placeholder="First Name"/>
@@ -79,7 +76,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  if($_SERVER["REQUEST_METHOD"] == "GET" || $_SERVER["REQUEST_METHOD"] == "POST"){
     $sql = "SELECT * FROM teacher";
     $result = mysqli_query($db,$sql);
-    
     echo '<div class="centeredContainer">
             <div class="controllableList">
                 <ul>

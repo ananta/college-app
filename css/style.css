@@ -20,7 +20,8 @@ h1 { color: #636363; }
 h3 { color: #4a89dc; }
 
 form {
-	width: 450px;
+	max-width: 450px;
+	min-width:300px;
 	margin: 1em auto;
 	padding: 3em 2em 2em 2em;
 	background: #fafafa;
@@ -45,6 +46,9 @@ input {
 	border: none;
 	border-radius: 0;
 	border-bottom: 1px solid #757575;
+}
+.checkBox {
+
 }
 
 .formLabel {
@@ -436,7 +440,9 @@ header {
 	margin-right:10px;
 	margin-top:5px;
   }
+
   /* Events Page */
+
   .eventImg {
 	background-color: #aaa;
 	width: 50%;
@@ -592,7 +598,37 @@ header {
 	margin-top:20px;
 	display: table;
 	width:450px;
-	overflow: auto;
 	text-align: center;
 	background: #fff;
 }
+
+  input[type=checkbox] {
+	width: 30px;
+	height: 30px;
+	margin-right: 8px;
+	cursor: pointer;
+	font-size: 17px;
+	visibility: hidden;
+  }
+  
+  input[type=checkbox]:after {
+	content: " ";
+	background-color: #fff;
+	display: inline-block;
+	margin-left: 10px;
+	padding-bottom: 5px;
+	color: #00BFF0;
+	width: 22px;
+	height: 25px;
+	visibility: visible;
+	border: 1px solid #00BFF0;
+	padding-left: 3px;
+	border-radius: 5px;
+  }
+  
+  input[type=checkbox]:checked:after {
+	content: "\2714";
+	padding: -5px;
+	font-weight: bold;
+  }
+	  

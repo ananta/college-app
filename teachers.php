@@ -8,7 +8,6 @@
     <div class="heroic-header">
         <h1 class="heroic-title">Teachers</h1>
     </div>
-
 <?php
  if($_SERVER["REQUEST_METHOD"] == "GET"){
     $sql = "SELECT * FROM teacher";

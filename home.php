@@ -4,7 +4,7 @@
 ?>
 
     <div class="row">
-        <div class="column">
+        <div class="column" style="width:35%; min-width:400px;">
             <div class="card">
                 <img src="res/avatar.png" alt="Avatar Image" style="width:100%">  
                 <h1 class="cardTitle"><?php echo $_SESSION['name'];?></h1>
@@ -13,7 +13,7 @@
                 <button class="button buttonGreen">Edit Profile</button>
             </div>
         </div>
-        <div class="column">
+        <div class="column" style="width:65%;">
             <div class="homeGridMenu">
                 <?php 
                 if($_SESSION["login_user"] == "admin"){
@@ -29,5 +29,15 @@
     
     </div>
 <?php 
+    if(isset($_SESSION["isAdmin"])){
+        if($_SESSION["isAdmin"]){
+            echo "Admin";
+        }else {
+            echo "This was not ment to be happened";
+        }
+    }else{
+        echo "Not Admin";   
+    }
     include('components/footer.php');
+    
 ?>

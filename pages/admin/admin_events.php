@@ -12,18 +12,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $event_date = $_POST["event_date"];
     $event_description = filter_var($_POST["event_description"], FILTER_SANITIZE_MAGIC_QUOTES);
     $event_bannerLocation = "";
-
     $file = $_FILES['event_banner'];
     $file_name = $file['name'];
     $file_temp_name = $file['tmp_name'];
     $file_size = $file['size'];
     $file_error = $file['error'];
     $file_type = $file['type'];
-
     if($file_size != 0){
         $file_ext = explode('.', $file_name);
         $file_actual_ext = strtolower(end($file_ext));
-    
         $allowed = array('jpg','jpeg','png','pdf');
         if(in_array($file_actual_ext, $allowed)){
             if($file_error === 0 ){
@@ -53,8 +50,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $current_user = $_SESSION["login_user"];
         $query = "INSERT INTO event ( event_title, event_venue, event_date, event_description, event_image, added_by ) VALUES ('$event_title','$event_venue','$event_date','$event_description','$event_bannerLocation','$current_user')";
         $data = mysqli_query($db, $query);
-        if($data){
-            $messages[] = "Added Event ".$event_title;
+        if($data){ $messages[] = "Added Event ".$event_title;
         }else{
             $errors[] = "ERROR ". $query;
         }
@@ -76,9 +72,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="text" name="event_venue" placeholder="Venue"/>
                     <h3 class="formLabel">Date Time</h3>
                     <input type="datetime-local" name="event_date" placeholder="Event Date"/>
-                <div>
-                    <textarea rows="6" cols="20" name="event_description" form="eventsform" placeholder="Event's Description"></textarea>
-                </div>
+                    <div>
+                        <textarea rows="6" cols="20" name="event_description" form="eventsform" placeholder="Event's Description"></textarea>
+                    </div>
                 <input type="file" name="event_banner" placeholder="Image"/>
                 <input type="submit"class="button buttonBlue" name="Login" value="Submit"/>
             </form>
@@ -104,7 +100,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         ';
         while($row = mysqli_fetch_array($result)) { 
             echo '
-                        <li>
+                    <li>
                         <div style="display:inline;">
                             <div style="background-color:#235F87; padding:5px;">
                             <img style="" src="'.$mainPage."uploads/events/".($row["event_image"] ? $row["event_image"] : "default.png").'" alt="Avatar Image">  
@@ -113,10 +109,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 <h4>'.$row['event_description'].'</h4>
                             </div>
                             <div class="controllableListButtons">
-                                <button class="button" style="background-color:green;">Edit</button>
+                                <a href="'.$mainPage.'pages/edit/edit_events.php?editEvent='.$row['event_id'].'">
+                                    <button class="button" style="background-color:green;">Edit</button>
+                                </a>
                                 <button class="button" style="background-color:red;">Delete</button>
-                            </div>
-                        </li>
+                        </div>
+                    </li>
                 ';
         }
         echo '
@@ -125,6 +123,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>';
         }
     }
+    echo $_GET["editPost"];
 ?>
         </div>
     </div>

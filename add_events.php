@@ -68,8 +68,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <?php include('components/message.php')?>    
     <input type="text" name="event_title" placeholder="Title"/>
     <input type="text" name="event_venue" placeholder="Venue"/>
-        <h3 class="formLabel">Date Time</h3>
-        <input type="datetime-local" name="event_date" placeholder="Event Date"/>
+    <h3 class="formLabel">Date Time</h3>
+    <input type="datetime-local" name="event_date" placeholder="Event Date"/>
     <div>
         <textarea rows="6" cols="20" name="event_description" form="eventsform" placeholder="Event's Description"></textarea>
     </div>

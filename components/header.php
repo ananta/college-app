@@ -3,6 +3,7 @@
 	$currentPage = substr($_SERVER['REQUEST_URI'],12);
 	$mainPage= 'http://'.$_SERVER['SERVER_NAME']."/gcesServer/";
 	$mainLocation = $_SERVER['DOCUMENT_ROOT']."/gcesServer/";
+	$verified = false;
 ?>
 
 <!DOCTYPE html>
@@ -43,8 +44,6 @@
 			</ul>
 		</nav>	
 		';
-		echo $mainPage.'add_teachers.php';
-		echo $currentPage;
 	  }
 	?>
 	
