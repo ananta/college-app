@@ -123,7 +123,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>';
         }
     }
-    echo $_GET["editPost"];
 ?>
         </div>
     </div>
