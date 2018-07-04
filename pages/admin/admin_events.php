@@ -5,6 +5,7 @@ include('../../config/config.php');
 $errors = array();
 $messages = array();  
 
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $tmp_title= $_POST["event_title"];
     $event_title = filter_var($tmp_title, FILTER_SANITIZE_MAGIC_QUOTES);
@@ -50,7 +51,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $current_user = $_SESSION["login_user"];
         $query = "INSERT INTO event ( event_title, event_venue, event_date, event_description, event_image, added_by ) VALUES ('$event_title','$event_venue','$event_date','$event_description','$event_bannerLocation','$current_user')";
         $data = mysqli_query($db, $query);
-        if($data){ $messages[] = "Added Event ".$event_title;
+        if($data){ 
+            $messages[] = "Added Event ".$event_title;
+            
         }else{
             $errors[] = "ERROR ". $query;
         }
@@ -84,45 +87,57 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <h1>Your Events</h1>
             </div>
         <?php
- if($_SERVER["REQUEST_METHOD"] == "GET" || $_SERVER["REQUEST_METHOD"] == "POST"){
-    $sql = "SELECT * FROM event WHERE added_by = '".$_SESSION["login_user"]."';";
-    $result = mysqli_query($db,$sql);
-    if(mysqli_num_rows($result) == 0){
-        echo '
-        <div style="line-height:300px; text-align:center; height:300px; ">
-            <h1 style="color: gray;">No Events Found :D</h1>
+            if($_SERVER["REQUEST_METHOD"] == "GET" || $_SERVER["REQUEST_METHOD"] == "POST"){
+                $sql = "SELECT * FROM event WHERE added_by = '".$_SESSION["login_user"]."';";
+                $result = mysqli_query($db,$sql);
+                if(mysqli_num_rows($result) == 0){
+                    echo '
+                    <div style="line-height:300px; text-align:center; height:300px; ">
+                        <h1 style="color: gray;">No Events Found :D</h1>
+                    </div>
+                    ';
+                }else {
+                    echo '<div class="centeredContainer">
+                    <div class="controllableList">
+                        <ul>
+                    ';
+                    while($row = mysqli_fetch_array($result)) { 
+                        echo '
+                                <li>
+                                    <div style="display:inline;">
+                                        <div style="background-color:#235F87; padding:5px;">
+                                        <img style="" src="'.$mainPage."uploads/events/".($row["event_image"] ? $row["event_image"] : "default.png").'" alt="Avatar Image">  
+                                        </div>
+                                            <h1>'.$row['event_title'].'</h1>
+                                            <h4>'.$row['event_description'].'</h4>
+                                        </div>
+                                        <div class="controllableListButtons">
+                                            <a href="'.$mainPage.'pages/edit/edit_events.php?editEvent='.$row['event_id'].'">
+                                                <button class="button" style="background-color:green;">Edit</button>
+                                            </a>
+                                            <a href="'.$mainPage.'pages/edit/edit_events.php?deleteEvent='.$row['event_id'].'">
+                                                <button class="button" style="background-color:red;">Delete</button>
+                                            </a>
+                                    </div>
+                                </li>
+                            ';
+                    }
+                    echo '
+                                </ul>
+                            </div>
+                        </div>';
+                    }
+                }
+?>
+
         </div>
-        ';
-    }else {
-        echo '<div class="centeredContainer">
-        <div class="controllableList">
-            <ul>
-        ';
-        while($row = mysqli_fetch_array($result)) { 
-            echo '
-                    <li>
-                        <div style="display:inline;">
-                            <div style="background-color:#235F87; padding:5px;">
-                            <img style="" src="'.$mainPage."uploads/events/".($row["event_image"] ? $row["event_image"] : "default.png").'" alt="Avatar Image">  
-                            </div>
-                                <h1>'.$row['event_title'].'</h1>
-                                <h4>'.$row['event_description'].'</h4>
-                            </div>
-                            <div class="controllableListButtons">
-                                <a href="'.$mainPage.'pages/edit/edit_events.php?editEvent='.$row['event_id'].'">
-                                    <button class="button" style="background-color:green;">Edit</button>
-                                </a>
-                                <button class="button" style="background-color:red;">Delete</button>
-                        </div>
-                    </li>
-                ';
-        }
-        echo '
-                    </ul>
-                </div>
-            </div>';
-        }
+
+</div>
+<?php 
+    include('../../components/snackbar.php');
+    include('../../components/footer.php');
+    if(isset($_GET["message"])){
+
+        echo "<script type='text/javascript'>showMessage('success', '".$_GET["message"]."')</script>";
     }
 ?>
-        </div>
-    </div>

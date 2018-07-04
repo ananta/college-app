@@ -13,6 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Admin Login</title>
 	<link rel="stylesheet" href="<?php echo $mainPage?>css/style.css?load=<?php echo time();?>" type="text/css">
+
 </head>
 <body>
 <header>

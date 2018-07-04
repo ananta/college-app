@@ -12,7 +12,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $event_date = $_POST["event_date"];
     $event_description = filter_var($_POST["event_description"], FILTER_SANITIZE_MAGIC_QUOTES);
     $event_bannerLocation = "";
-
     $file = $_FILES['event_banner'];
     $file_name = $_FILES['event_banner']['name'];
     $file_temp_name = $_FILES['event_banner']['tmp_name'];

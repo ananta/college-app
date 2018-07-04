@@ -32,13 +32,14 @@ if($_SERVER["REQUEST_METHOD"] == "GET" || $_SERVER["REQUEST_METHOD"] == "POST"){
                     <textarea rows="6" cols="20" name="event_description" form="eventsform" placeholder="Events Description">'.$row["event_description"].'</textarea>
                 </div>
                 <input type="file" name="event_banner" placeholder="Image"/>
-                <input type="submit"class="button buttonBlue" name="Login" value="Update"/>
+                <input type="submit"class="button buttonBlue" name="update" value="Update"/>
+                <input type="submit"class="button" style="background-color:red;" name="delete" value="Delete"/>
             </form>
         ';                
     }
 }
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if(isset($_POST['update'])){
     $tmp_title= $_POST["event_title"];
     $event_title = filter_var($tmp_title, FILTER_SANITIZE_MAGIC_QUOTES);
     $event_venue = filter_var($_POST["event_venue"], FILTER_SANITIZE_MAGIC_QUOTES);
@@ -104,6 +105,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }else{
             $errors[] = "ERROR ". $query;
         }
+    }
+}
+if(isset($_POST['delete'])){
+     $query = 'DELETE FROM event WHERE event_id='.$eventID;
+     $data = mysqli_query($db, $query);
+     if ($data) {
+        header("Location: ".$mainPage."pages/admin/admin_events.php?message=".htmlspecialchars("Sucessfully Deleted"));
+    } else {
+        array_push($errors,"Unable to Delete the Event");
     }
 }
 ?>
