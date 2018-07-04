@@ -17,7 +17,7 @@
     while($row = mysqli_fetch_array($result)){
         echo '<div class ="grid-item">
                 <div class="teachersCard">
-                    <img style=" width:100%;border-top-left-radius:10px;border-top-right-radius:10px;" src="res/avatar.png" alt="Avatar Image" style="width:100%">  
+                    <img style="width:250px; height:auto;" src="'.(($row['profile_img'])?($mainPage.'uploads/users/profile-picture/'.$row['profile_img']):($mainPage.'res/avatar.png')).'" alt="Avatar Image">  
                     <h1 class="cardTitle">'.$row['first_name']." ". $row['last_name'].'</h1>
                     <h4 class="cardUsername">'."@".$row['username'].'</h4>
                     <h4 class="cardEmail">'.$row['email'].'</h4>

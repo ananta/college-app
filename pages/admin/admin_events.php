@@ -52,7 +52,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $query = "INSERT INTO event ( event_title, event_venue, event_date, event_description, event_image, added_by ) VALUES ('$event_title','$event_venue','$event_date','$event_description','$event_bannerLocation','$current_user')";
         $data = mysqli_query($db, $query);
         if($data){ 
-            $messages[] = "Added Event ".$event_title;
+        header("Location: ".$mainPage."pages/admin/admin_events.php?message=".htmlspecialchars("Added Event ".$event_title));
+        // $messages[] = "Added Event ".$event_title;
             
         }else{
             $errors[] = "ERROR ". $query;
@@ -114,9 +115,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                         <div class="controllableListButtons">
                                             <a href="'.$mainPage.'pages/edit/edit_events.php?editEvent='.$row['event_id'].'">
                                                 <button class="button" style="background-color:green;">Edit</button>
-                                            </a>
-                                            <a href="'.$mainPage.'pages/edit/edit_events.php?deleteEvent='.$row['event_id'].'">
-                                                <button class="button" style="background-color:red;">Delete</button>
                                             </a>
                                     </div>
                                 </li>
