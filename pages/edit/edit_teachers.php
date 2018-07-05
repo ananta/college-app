@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET" || $_SERVER["REQUEST_METHOD"] == "POST"){
     if(mysqli_num_rows($result) == 0){
         array_push($errors, "Oops Something Went Wrong");
     }else {
-        $imageName = $row["event_image"];
+        $imageName = $row["profile_img"];
         $editFORM = '
             <form method="post" action="" id="eventsform" enctype="multipart/form-data">
                 <h1>Edit Teachers</h1>
@@ -37,18 +37,18 @@ if($_SERVER["REQUEST_METHOD"] == "GET" || $_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 if(isset($_POST['update'])){
-    $tmp_title= $_POST["event_title"];
-    $event_title = filter_var($tmp_title, FILTER_SANITIZE_MAGIC_QUOTES);
-    $event_venue = filter_var($_POST["event_venue"], FILTER_SANITIZE_MAGIC_QUOTES);
-    $event_date = $_POST["event_date"];
-    $event_description = filter_var($_POST["event_description"], FILTER_SANITIZE_MAGIC_QUOTES);
-    $event_bannerLocation = "";
-    $file = $_FILES['event_banner'];
-    $file_name = $_FILES['event_banner']['name'];
-    $file_temp_name = $_FILES['event_banner']['tmp_name'];
-    $file_size = $_FILES['event_banner']['size'];
-    $file_error = $_FILES['event_banner']['error'];
-    $file_type = $_FILES['event_banner']['type'];
+    $first_name = filter_var($_POST["first_name"], FILTER_SANITIZE_MAGIC_QUOTES);
+    $last_name = filter_var($_POST["last_name"], FILTER_SANITIZE_MAGIC_QUOTES);
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_MAGIC_QUOTES);
+    // $password = filter_var($_POST["password"], FILTER_SANITIZE_MAGIC_QUOTES);
+    $phone = filter_var($_POST["phone"], FILTER_SANITIZE_MAGIC_QUOTES);
+    $profileImg = "";
+    $file = $_FILES['profile_img'];
+    $file_name = $file['name'];
+    $file_temp_name = $file['tmp_name'];
+    $file_size = $file['size'];
+    $file_error = $file['error'];
+    $file_type = $file['type'];
     if($file_size != 0){
         $file_ext = explode('.', $file_name);
         $file_actual_ext = strtolower(end($file_ext));
@@ -57,12 +57,12 @@ if(isset($_POST['update'])){
             if($file_error === 0 ){
                 if($file_size < 10000000){
                     $file_nameNew = uniqid('', true).".".$file_actual_ext;
-                    $file_destination = '/opt/lampp/htdocs/gcesServer/uploads/events/'. $file_nameNew;
+                    $file_destination = '/opt/lampp/htdocs/gcesServer/uploads/users/profile-picture/'. $file_nameNew;
                     if(is_uploaded_file($file_temp_name)){
                         if(move_uploaded_file($file_temp_name, $file_destination)){
-                            if(empty($event_title)) { array_push($errors, "Event Title Required"); };
-                            if(empty($event_venue)) { array_push($errors, "Event Venue Required"); };
-                            $event_bannerLocation = $file_nameNew;
+                            if(empty($first_name)) { array_push($errors, "First Name Required"); };
+                            if(empty($last_name)) { array_push($errors, "Last Name Required"); };
+                            $profileImg = $file_nameNew;
                             $newImageRequired = true;
                         } else {
                             array_push($errors, "TEMPORARY +> ".$file_temp_name);
@@ -89,16 +89,16 @@ if(isset($_POST['update'])){
         $current_user = $_SESSION["login_user"];
         $finalImage='';
         if(empty($imageName) || $newImageRequired){
-            $finalImage = $event_bannerLocation;
+            $finalImage = $profileImg;
             array_push($messages," NEW ".$finalImage);
         }else{
             $finalImage = $imageName;
             array_push($messages," OLD ".$imageName);
         }
-        $query = 'UPDATE event SET event_title="'.$event_title.'",event_venue="'.$event_venue.'",event_date="'.$event_date.'",event_description="'.$event_description.'",event_image="'.$finalImage.'" WHERE event_id='.$eventID.';';
+        $query = 'UPDATE teacher SET first_name="'.$first_name.'",last_name="'.$last_name.'",email="'.$email.'",phone="'.$phone.'",profile_img="'.$finalImage.'" WHERE id='.$teacherID.';';
         $data = mysqli_query($db, $query);
         if($data){
-            $messages[] = "Updated Event ".$event_title;
+            $messages[] = "Updated Teacher ".$first_name;
         }else{
             $errors[] = "ERROR ". $query;
         }
@@ -119,7 +119,7 @@ if(isset($_POST['delete'])){
     <?php include("../../components/errors.php")?>
     <?php include("../../components/message.php")?>  
     <div class="column">
-        <img style="width:600px; height:auto;"src='<?php $imgPath = $imageName ? $mainPage."/uploads/events/".$imageName : $mainPage."/uploads/events/default.png"; echo $imgPath; ?>' alt="Avatar Image" style="width:100%">  
+        <img style="width:600px; height:auto;"src='<?php $imgPath = ($imageName) ? ($mainPage."uploads/users/profile-picture/".$imageName) : $mainPage."res/avatar.png"; echo $imgPath; ?>' alt="Avatar Image" style="width:100%">  
     </div>
     <div class="column">
             <?php
