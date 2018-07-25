@@ -140,3 +140,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
         </div>
     </div>
+    <?php 
+    include('../../components/snackbar.php');
+    include('../../components/footer.php');
+    if(isset($_GET["message"])){
+        echo "<script type='text/javascript'>showMessage('success', '".$_GET["message"]."')</script>";
+    }
+    if(isset($_GET["error"])){
+        echo "<script type='text/javascript'>showMessage('error', '".$_GET["error"]."')</script>";
+    }
+?>

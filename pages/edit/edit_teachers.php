@@ -31,6 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET" || $_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="text" name="phone" placeholder="Phone" value="'.$row["phone"].'"/>
                 <input type="file" name="profile_img" placeholder="Image"/>
                 <input type="submit"class="button buttonBlue" name="update" value="Update"/>
+                <input type="submit"class="button" style="background-color:red;" name="delete" value="Delete"/>
             </form>
         ';                
     }
@@ -105,12 +106,12 @@ if(isset($_POST['update'])){
     }
 }
 if(isset($_POST['delete'])){
-     $query = 'DELETE FROM event WHERE event_id='.$eventID;
+     $query = 'DELETE FROM teacher WHERE id='.$teacherID;
      $data = mysqli_query($db, $query);
      if ($data) {
-        header("Location: ".$mainPage."pages/admin/admin_events.php?message=".htmlspecialchars("Sucessfully Deleted"));
+        header("Location: ".$mainPage."pages/admin/admin_teachers.php?message=".htmlspecialchars("Sucessfully Deleted"));
     } else {
-        array_push($errors,"Unable to Delete the Event");
+        array_push($errors,"Unable to Delete Teacher");
     }
 }
 ?>
