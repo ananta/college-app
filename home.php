@@ -18,6 +18,7 @@
                 <?php 
                 if($_SESSION["login_user"] == "admin"){
                     echo '<div class="moduleItem"><a href="pages/admin/admin_teachers.php">Teachers</a></div>'; 
+                    echo '<div class="moduleItem"><a href="pages/admin/admin_batch.php">Batch</a></div>';
                 };  
                 ?>                
                 <div class="moduleItem"><a href="pages/admin/admin_events.php">Events</a></div>
