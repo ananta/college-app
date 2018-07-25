@@ -7,12 +7,12 @@ function showMessage(type, message) {
       x.innerHTML = message;
       setTimeout(function(){ x.className = x.className.replace("showSuccess", ""); }, 3000);
     break;
-    case 'warning':
+    case 'error':
       var x = document.getElementById("snackbar");
       x.className = "showError";
       setTimeout(function(){ x.className = x.className.replace("showError", ""); }, 3000);
     break;
-    case 'error':
+    case 'warning':
       var x = document.getElementById("snackbar");
       x.className = "showWarning";
       setTimeout(function(){ x.className = x.className.replace("showWarning", ""); }, 3000);

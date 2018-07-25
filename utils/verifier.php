@@ -1,5 +1,5 @@
 <?php
-$acceptedArray = ["editEvent", "editTeacher", "editResource", "editResult", "editTeacher", "editNotice"];
+$acceptedArray = ["editEvent", "editTeacher", "editResource", "editResult", "editTeacher", "editNotice", "editBatch"];
 function add_to_db($key, $content) {
     global $db;
     global $verified;
@@ -14,6 +14,9 @@ function add_to_db($key, $content) {
         $sql = 'SELECT * FROM teacher WHERE id='.$content.';';
         $result = mysqli_query($db,$sql);
         $verified = (mysqli_num_rows($result) > 0) ? true : false; 
+        break;
+        case "editBatch":
+        $verified = ($_SESSION["login_user"] == "admin") ? true : false; 
         break;
     }
 }

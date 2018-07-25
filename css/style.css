@@ -669,7 +669,7 @@ header {
 
 #snackbar.showError {
 	visibility: visible;
-	background-color:rgb(175, 76, 76);
+	background-color:rgb(192, 20, 20);
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
