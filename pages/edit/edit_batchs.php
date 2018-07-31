@@ -38,12 +38,13 @@ if($_SERVER["REQUEST_METHOD"] == "GET" || $_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 if(isset($_POST['update'])){
+    $old_batch_id = $_GET["editBatch"];
     $batch_id = filter_var($_POST["batch_id"], FILTER_SANITIZE_MAGIC_QUOTES);
     $batch_email = filter_var($_POST["batch_email"], FILTER_SANITIZE_MAGIC_QUOTES);
     $batch_title = filter_var($_POST["batch_title"], FILTER_SANITIZE_MAGIC_QUOTES);
     $batch_keyword = filter_var($_POST["batch_keyword"], FILTER_SANITIZE_MAGIC_QUOTES);
     $profileImg = "";
-    $file = $_FILES['landing_img'];
+    $file = $_FILES['batch_img'];
     $file_name = $file['name'];
     $file_temp_name = $file['tmp_name'];
     $file_size = $file['size'];
@@ -91,16 +92,16 @@ if(isset($_POST['update'])){
         $current_user = $_SESSION["login_user"];
         $finalImage='';
         if(empty($imageName) || $newImageRequired){
-            $finalImage = $landingImgImg;
+            $finalImage = $landingImg;
             array_push($messages," NEW ".$finalImage);
         }else{
             $finalImage = $imageName;
             array_push($messages," OLD ".$imageName);
         }
-        $query = 'UPDATE batch SET batch_id="'.$batch_id.'",batch_email="'.$batch_email.'",batch_title="'.$batch_title.'",batch_keyword="'.$batch_keyword.'",batch_img="'.$finalImage.'" WHERE id='.$batch_id.';';
+        $query = 'UPDATE batch SET batch_id="'.$batch_id.'",batch_email="'.$batch_email.'",batch_title="'.$batch_title.'",batch_keyword="'.$batch_keyword.'",batch_img="'.$finalImage.'" WHERE batch_id="'.$old_batch_id.'";';
         $data = mysqli_query($db, $query);
         if($data){
-            $messages[] = "Updated Teacher ".$first_name;
+            $messages[] = "Updated Batch ".$batch_title;
         }else{
             $errors[] = "ERROR ". $query;
         }
