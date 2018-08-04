@@ -1,12 +1,25 @@
 <?php
 include('../../utils/session.php');
+include('../../utils/send_email.php');
 include('../../components/header.php');
 include('../../config/config.php');
 $errors = array();
 $messages = array();  
 
+function getBatchInfo($db) {
+    $list = array();
+    $batchQuery = "select * from batch";
+    $result = mysqli_query($db,$batchQuery);
+    if(!$result) return null;
+    while($row = mysqli_fetch_assoc($result)){
+        array_push($list, $row);
+    }
+    return $list;
+}
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $list =$_POST["notifyBatches"];
+    // sendEmail("eventEmail", "anantabastola",$list);
     $tmp_title= $_POST["event_title"];
     $event_title = filter_var($tmp_title, FILTER_SANITIZE_MAGIC_QUOTES);
     $event_venue = filter_var($_POST["event_venue"], FILTER_SANITIZE_MAGIC_QUOTES);
@@ -80,6 +93,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <textarea rows="6" cols="20" name="event_description" form="eventsform" placeholder="Event's Description"></textarea>
                     </div>
                 <input type="file" name="event_banner" placeholder="Image"/>
+                <h3 class="formLabel">Send Email Notification</h3>
+                <div style="margin-top:30px; margin-left:30px">
+                <select name="notifyBatches[]" multiple>
+                    <?php
+                        $batchlist = getBatchInfo($db);
+                        foreach( $batchlist as $batch ){
+                            echo "<option value='".$batch["batch_email"]."'>".$batch["batch_title"]."</option>";
+                        }
+                    ?>
+                </select>
+                </div>
+                
                 <input type="submit"class="button buttonBlue" name="Login" value="Submit"/>
             </form>
         </div>
@@ -133,7 +158,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </div>
 <?php 
     include('../../components/snackbar.php');
-    include('../../components/footer.php');
+    // include('../../components/footer.php');
     if(isset($_GET["message"])){
 
         echo "<script type='text/javascript'>showMessage('success', '".$_GET["message"]."')</script>";

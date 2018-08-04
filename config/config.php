@@ -1,4 +1,5 @@
 <?php
+    global $db;
     $domain ="http://localhost/gcesServer";
     $db_host = 'localhost';
     $db_name = 'gces';
