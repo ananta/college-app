@@ -1,0 +1,91 @@
+div.float{
+    background: #235F87;
+   font-family: helvetica;
+   color: white;
+   height: 50px;
+}
+
+div.float a.info{
+    position: relative;
+    float: left;
+    color: white;
+    padding:8px;
+    padding-top: 13px;
+    text-decoration: none;
+    font-weight: bold;
+    
+}
+
+div.float a.contact{
+    position: relative;
+    float: right;
+    color: white;
+    padding:8px;
+    padding-top: 13px;
+    text-decoration: none;
+}
+
+div.row{
+    height:475px;
+    width:1200px;
+}
+
+div.row img{
+    height: 535px;
+    width: 1200px;
+    
+}
+
+p.head{
+    font-family: script;
+    font-size: 30px;
+    color: gray;
+    font-weight: bold;
+    padding-left: 50px;
+}
+p.head1{
+    font-family: script;
+    font-size: 30px;
+    color: gray;
+    font-weight: bold;
+    padding-left: 15px;
+}
+p.head1{
+    font-family: script;
+    font-size: 30px;
+    color: gray;
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+p.desc2{
+    font-family: script;
+    font-size: 18px;
+    color: white;
+    padding-left: 15px;
+    font-weight: 100;
+    
+}
+
+p.head2{
+    font-family: script;
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+div.contents{
+    background: #235F87;
+    font-family: helvetica;
+    color: gray;
+    height: 100%;
+}
+
+p.mid{
+    font-size:30px;
+    color: white;
+    font-family: helvetica;
+    text-align: center;
+}
