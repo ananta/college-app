@@ -4,5 +4,9 @@
     Gandaki College Of Engineering And Science
 </p>
 
+<?php 
+    echo $currentPage;
+?>
+
 </body>
 </html>
