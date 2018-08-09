@@ -1,8 +1,8 @@
 <?php
+require '/opt/lampp/htdocs/gcesServer/PHPMailerAutoload.php';
+function sendEmail($type, $emailList, $htmlBody){
 
-function sendEmail($type, $author, $emailList){
     global $_eventTitle;
-
     switch($type){
         case "eventEmail":
             $_eventTitle = "Event Notification";
@@ -19,33 +19,37 @@ function sendEmail($type, $author, $emailList){
     }
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    $headers .= "From:".$author."<@gces.edu.np>";
-    $headers .= "Cc: ".$_eventTitle."\r\n";
-
-    $emailComponent="
-        <html>
-            <head>
-                <title></title>
-            </head>
-            <body>
-                <p>This email contains HTML Tags!</p>
-                <table>
-                <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                </tr>
-                <tr>
-                <td>John</td>
-                <td>Doe</td>
-                </tr>
-                </table>
-            </body>
-        </html>
-    ";
-
-    foreach($emailList as $email){
-        mail($email,"GCES Notification",$emailComponent,$headers);
+    try {
+        //Server settings
+        $mail = new PHPMailer(true);  
+        // $mail->SMTPDebug = 4;  
+        $mail->isSMTP();                             
+        $mail->Host = 'smtp.gmail.com'; 
+        $mail->SMTPAuth = true;                              
+        $mail->Username = 'nodexeon@gmail.com';
+        $mail->Password = 'bastola123';
+        $mail->SMTPSecure = 'tls';                            
+        $mail->Port = 587;   
+        //Recipients
+        foreach($emailList as $email){
+            $mail->addAddress($email); 
+        }
+        $mail->setFrom('webapp@gces.edu.np', 'GCES WEBAPP');
+        $mail->addReplyTo('nodexeon@gmail.com', 'WEBAPP');
+        //Attachments
+        // $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+        $mail->isHTML(true);
+        $mail->Subject = "GCES WEBAPP - ".$_eventTitle;
+        $mail->Body    = $htmlBody."\n BODY";
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        $mail->send();
+        return true;
+    } catch (Exception $e) {
+        echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+        return $mail->ErrorInfo;
     }
+
 
 
 }
