@@ -20,18 +20,46 @@
             <div class="homeGridMenu">
                 <?php 
                 if($_SESSION["login_user"] == "admin"){
-                    echo '<div class="moduleItem"><a href="pages/admin/admin_teachers.php">Teachers</a></div>'; 
-                    echo '<div class="moduleItem"><a href="pages/admin/admin_batch.php">Batch</a></div>';
+                    echo '<div class="moduleItem"><a href="pages/admin/admin_teachers.php">
+                    <img class= "moduleItem" src="icons/teachers.png" alt="Teachers">
+                    </a></div>'; 
+                    echo '<div class="moduleItem"><a href="pages/admin/admin_batch.php">
+                    <img class= "moduleItem" src="icons/batches.png" alt="Batch">
+                    </a>
+                    </div>';
+                 
+                
                 };  
-                ?>                
-                <div class="moduleItem"><a href="pages/admin/admin_events.php">Events</a></div>
-                <div class="moduleItem"><a href="pages/admin/admin_notices.php">Notices</a></div>
-                <div class="moduleItem"><a href="pages/admin/admin_results.php">Result</a></div>
-                <div class="moduleItem"><a href="pages/admin/admin_resources.php">Resources</a></div>
+                ?> 
+
+                <div class="moduleItem"><a href="events.php">
+                    <img class= "moduleItem" src="icons/event.png" alt="Events"></a>
+
+                </div>
+                <div class="moduleItem"><a href="pages/admin/admin_notices.php">
+                <img class= "moduleItem" src="icons/rem.png" alt="Notices"></a>
+                </div>
+                <div class="moduleItem"><a href="pages/admin/admin_result.php">
+                <img class= "moduleItem" src="icons/result.png" alt="Result"></a>
+                </div>
+                <div class="moduleItem"><a href="pages/admin/admin_resources.php">
+                <img class= "moduleItem" src="icons/resource.png" alt="Resources"></a>
+
+              
             </div>
         </div>
     
     </div>
 <?php 
-    include('components/footer.php');
+    if(isset($_SESSION["isAdmin"])){
+        if($_SESSION["isAdmin"]){
+            echo "Admin";
+        }else {
+            echo "This was not ment to be happened";
+        }
+    }else{
+        echo "Not Admin";   
+    }
+    include('footer.php');
+    
 ?>
