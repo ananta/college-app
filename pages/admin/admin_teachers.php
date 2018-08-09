@@ -1,6 +1,6 @@
 <?php
-include('../../utils/session.php');
 include('../../components/header.php');
+include('../../utils/session.php');
 include('../../config/config.php');
 $errors = array();
 $messages = array();  

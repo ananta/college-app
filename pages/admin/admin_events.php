@@ -1,7 +1,7 @@
 <?php
+include('../../components/header.php');
 include('../../utils/session.php');
 include('../../utils/send_email.php');
-include('../../components/header.php');
 include('../../config/config.php');
 $errors = array();
 $messages = array();  
@@ -67,7 +67,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($data){ 
         header("Location: ".$mainPage."pages/admin/admin_events.php?message=".htmlspecialchars("Added Event ".$event_title));
         // $messages[] = "Added Event ".$event_title;
-            
         }else{
             $errors[] = "ERROR ". $query;
         }
