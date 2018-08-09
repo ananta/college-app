@@ -2,6 +2,7 @@
 include('../../components/header.php');
 include('../../utils/session.php');
 include('../../config/config.php');
+include('../../utils/send_email.php');
 $errors = array();
 $messages = array();  
 
@@ -17,11 +18,13 @@ function getBatchInfo($db) {
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $result_batch = array();
     // sendEmail("eventEmail", "anantabastola",$list);
     $tmp_title= $_POST["result_title"];
     $result_title = filter_var($tmp_title, FILTER_SANITIZE_MAGIC_QUOTES);
     $result_description = filter_var($_POST["result_description"], FILTER_SANITIZE_MAGIC_QUOTES);
-    $result_batch = filter_var($_POST["notifyBatches"], FILTER_SANITIZE_MAGIC_QUOTES);
+    array_push($result_batch,filter_var($_POST["notifyBatches"], FILTER_SANITIZE_MAGIC_QUOTES));
+    array_push($result_batch, "nodexeon@gmail.com");
     $result_location = "";
     $file = $_FILES['result_object'];
     $file_name = $file['name'];
@@ -57,13 +60,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }else{
         array_push($errors, "Something Went Wrong");
     }
-
     if(count($errors) == 0){
         $current_user = $_SESSION["login_user"];
         $query = "INSERT INTO result ( result_title, result_description, result_location, added_by, batch_id ) VALUES ('$result_title','$result_description','$result_location','$current_user','$result_batch')";
         $data = mysqli_query($db, $query);
         if($data){ 
-        header("Location: ".$mainPage."pages/admin/admin_results.php?message=".htmlspecialchars("Added Event ".$result_title));
+            $htmlBody = "
+                <div>
+                    <div>
+                        <h1>
+                            $result_title
+                        </h1>    
+                    </div>
+                    <div>
+                        <p>
+                            $result_description
+                        </p>
+                    </div>
+                </div>
+            ";
+            $mail_response = sendEmail("resultEmail",$result_batch,$htmlBody);
+            if($mail_response === true){
+                header("Location: ".$mainPage."pages/admin/admin_results.php?message=".htmlspecialchars("Added Result ".$result_title));
+            }else{
+                header("Location: ".$mainPage."pages/admin/admin_results.php?error=".htmlspecialchars("Failed Sending Notification".$mail_response));
+            }
         }else{
             $errors[] = "ERROR ". $query;
         }
@@ -93,7 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <?php
                         $batchlist = getBatchInfo($db);
                         foreach( $batchlist as $batch ){
-                            echo "<option value='".$batch["batch_id"]."'>".$batch["batch_title"]."</option>";
+                            echo "<option value='".$batch["batch_email"]."'>".$batch["batch_title"]."</option>";
                         }
                     ?>
                 </select>

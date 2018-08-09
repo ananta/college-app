@@ -32,7 +32,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $query = "INSERT INTO notice ( notice_title, notice_description, added_by ) VALUES ('$notice_title','$notice_description','$current_user')";
         $data = mysqli_query($db, $query);
         if($data){ 
-        header("Location: ".$mainPage."pages/admin/admin_notices.php?message=".htmlspecialchars("Added Notice ".$notice_title));
+            array_push($list, "nodexeon@gmail.com");
+            $htmlBody = "
+                <div>
+                    <div>
+                        <h1>
+                            $notice_title
+                        </h1>    
+                    </div>
+                    <div>
+                        <p>
+                            $notice_description
+                        </p>
+                    </div>
+                </div>
+            ";
+            $mail_response = sendEmail("noticeEmail",$list,$htmlBody);
+            if($mail_response === true){
+                header("Location: ".$mainPage."pages/admin/admin_notices.php?message=".htmlspecialchars("Added Notice ".$notice_title));
+            }else{
+                header("Location: ".$mainPage."pages/admin/admin_notices.php?error=".htmlspecialchars("Error Occured While Sending Email.".$notice_title));
+            }
         }else{
             $errors[] = "ERROR ". $query;
         }

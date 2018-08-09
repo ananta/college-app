@@ -1,6 +1,7 @@
 <?php
 include('../../components/header.php');
 include('../../utils/session.php');
+include('../../utils/send_email.php');
 include('../../config/config.php');
 $errors = array();
 $messages = array();  
@@ -17,11 +18,13 @@ function getBatchInfo($db) {
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $resource_batch = array();
+    array_push($resource_batch,filter_var($_POST["notifyBatches"], FILTER_SANITIZE_MAGIC_QUOTES));
+    array_push($resource_batch, "nodexeon@gmail.com");
     $tmp_title= $_POST["resource_title"];
     $resource_title = filter_var($tmp_title, FILTER_SANITIZE_MAGIC_QUOTES);
     $resource_description = filter_var($_POST["resource_description"], FILTER_SANITIZE_MAGIC_QUOTES);
     $resource_location = "";
-    $resource_batch = $_POST["notifyBatches"];
     // sendEmail("eventEmail", "anantabastola",$resource_batch);
     $file = $_FILES['resource_object'];
     $file_name = $file['name'];
@@ -62,7 +65,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $query = "INSERT INTO resource ( resource_title, resource_description, resource_location, added_by, batch_id ) VALUES ('$resource_title','$resource_description','$resource_location','$current_user','$resource_batch')";
         $data = mysqli_query($db, $query);
         if($data){ 
-        header("Location: ".$mainPage."pages/admin/admin_resources.php?message=".htmlspecialchars("Added Event ".$resource_title));
+            $htmlBody = "
+                <div>
+                    <div>
+                        <h1>
+                            $resource_title
+                        </h1>    
+                    </div>
+                    <div>
+                        <p>
+                            $resource_description
+                        </p>
+                    </div>
+                </div>
+            ";
+            $mail_response = sendEmail("resourceEmail",$resource_batch,$htmlBody);
+            if($mail_response === true){
+                header("Location: ".$mainPage."pages/admin/admin_resources.php?message=".htmlspecialchars("Added Event ".$resource_title));
+            }else{
+                header("Location: ".$mainPage."pages/admin/admin_resources.php?error=".htmlspecialchars("Added Event ".$mail_response));
+            }
         }else{
             $errors[] = "ERROR ". $query;
         }
@@ -92,7 +114,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <?php
                         $batchlist = getBatchInfo($db);
                         foreach( $batchlist as $batch ){
-                            echo "<option value='".$batch["batch_id"]."'>".$batch["batch_title"]."</option>";
+                            echo "<option value='".$batch["batch_email"]."'>".$batch["batch_title"]."</option>";
                         }
                     ?>
                 </select>

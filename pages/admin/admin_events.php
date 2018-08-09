@@ -19,7 +19,6 @@ function getBatchInfo($db) {
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $list =$_POST["notifyBatches"];
-    // sendEmail("eventEmail", "anantabastola",$list);
     $tmp_title= $_POST["event_title"];
     $event_title = filter_var($tmp_title, FILTER_SANITIZE_MAGIC_QUOTES);
     $event_venue = filter_var($_POST["event_venue"], FILTER_SANITIZE_MAGIC_QUOTES);
@@ -65,8 +64,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $query = "INSERT INTO event ( event_title, event_venue, event_date, event_description, event_image, added_by ) VALUES ('$event_title','$event_venue','$event_date','$event_description','$event_bannerLocation','$current_user')";
         $data = mysqli_query($db, $query);
         if($data){ 
-        header("Location: ".$mainPage."pages/admin/admin_events.php?message=".htmlspecialchars("Added Event ".$event_title));
-        // $messages[] = "Added Event ".$event_title;
+            array_push($list, "nodexeon@gmail.com");
+            $htmlBody = "
+                <div>
+                    <div>
+                        <h1>
+                            $event_title
+                        </h1>    
+                    </div>
+                    <div>
+                        <p>
+                            $event_description
+                        </p>
+                    </div>
+                </div>
+            ";
+            $mail_response = sendEmail("eventEmail",$list,$htmlBody);
+            if($mail_response === true){
+                header("Location: ".$mainPage."pages/admin/admin_events.php?message=".htmlspecialchars("Added Event ".$event_title));
+            }else{
+                header("Location: ".$mainPage."pages/admin/admin_events.php?error=".htmlspecialchars("Added Event ".$event_title));
+            }
         }else{
             $errors[] = "ERROR ". $query;
         }
@@ -157,9 +175,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </div>
 <?php 
     include('../../components/snackbar.php');
-    // include('../../components/footer.php');
+    include('../../components/footer.php');
     if(isset($_GET["message"])){
-
         echo "<script type='text/javascript'>showMessage('success', '".$_GET["message"]."')</script>";
     }
 ?>
