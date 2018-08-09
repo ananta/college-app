@@ -33,15 +33,5 @@
     
     </div>
 <?php 
-    if(isset($_SESSION["isAdmin"])){
-        if($_SESSION["isAdmin"]){
-            echo "Admin";
-        }else {
-            echo "This was not ment to be happened";
-        }
-    }else{
-        echo "Not Admin";   
-    }
     include('components/footer.php');
-    
 ?>

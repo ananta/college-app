@@ -6,7 +6,7 @@
     $message = array();  
 ?>
     <div class="heroic-header">
-        <h1 class="heroic-title"><img class="heroic-img" src="res/calendar_icon.png">Events</h1>
+        <h1 class="heroic-title"><img class="heroic-img" src="res/calendar_icon.png">Notices</h1>
     </div>
     <div class="events-container">
 
@@ -40,3 +40,6 @@
 }
 ?>
 </div>
+<?php
+    include('components/footer.php');
+?>

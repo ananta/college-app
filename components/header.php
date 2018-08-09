@@ -14,6 +14,8 @@ session_start();
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Admin Login</title>
 	<link rel="stylesheet" href="<?php echo $mainPage?>css/style.css?load=<?php echo time();?>" type="text/css">
+	<link rel="stylesheet" href="<?php echo $mainPage?>css/footer.css?load=<?php echo time();?>" type="text/css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 </head>
 <body>
@@ -48,7 +50,7 @@ session_start();
 	  }else if (isset($_SESSION["batch_given"])){
 		echo '
 		<hr>
-			<a class='.($currentPage == "batch_home.php" ? "activeLink" : "inactiveLink").' href="'.$mainPage.'batch_home.php">Home</a>
+			<a class='.($currentPage == "batch_home.php" ? "activeLink" : "inactiveLink").' href="'.$mainPage.'batch_home.php"> Home</a>
 			<a class='.($currentPage == "resources.php" ? "activeLink" : "inactiveLink").' href="'.$mainPage.'resources.php">Resources</a>
 			<a class='.($currentPage == "results.php" ? "activeLink" : "inactiveLink").' href="'.$mainPage.'results.php">Results</a>
 			<a class="dangerLink"href="'.$mainPage.'logout.php">Logout</a>

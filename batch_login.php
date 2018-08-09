@@ -46,9 +46,6 @@
                 echo"<div class='group'><label style='font-size:10px;color:red;' >". $_SESSION['message']."</label></div>";};
       ?>      
     </form>
-    <?php
-      include('components/footer.php');
-    ?>
     <script  src="js/index.js"></script>
   </body>
 </html>
