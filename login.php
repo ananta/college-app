@@ -1,8 +1,6 @@
 <?php
   include('components/header.php');
   include("config/config.php");
-  ob_start();
-  session_start();
   $errors = array();
   $message = array();
 
@@ -18,13 +16,13 @@
     $sql = "SELECT * FROM teacher WHERE username = '$username' and password = '$password'";
     $result = mysqli_query($db,$sql);
     $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-    // $_SESSION['data'] = print_r($row,true);
     $count = mysqli_num_rows($result);	
     
       if($count == 1) {
          $_SESSION['login_user'] = $username;
          $_SESSION['name'] = $row['first_name'] .' '. $row['last_name'];
          $_SESSION['id'] = $row['id'];
+         $_SESSION['profileImg'] = $row['profile_img'];
          $_SESSION['email'] = $row['email'];
         if($_SESSION['login_user'] == "admin"){
           $_SESSION['isAdmin'] = true;
