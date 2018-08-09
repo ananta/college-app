@@ -3,7 +3,7 @@
     include("config/config.php");
     ob_start();
     $errors = array();
-    $message = array();  
+    $message = array();
 ?>
     <div class="heroic-header">
         <h1 class="heroic-title">Teachers</h1>
@@ -21,7 +21,9 @@
                     <h1 class="cardTitle">'.$row['first_name']." ". $row['last_name'].'</h1>
                     <h4 class="cardUsername">'."@".$row['username'].'</h4>
                     <h4 class="cardEmail">'.$row['email'].'</h4>
-                    <button class="button buttonGreen">Contact</button>
+                    <a href="'.$mainPage.'view_teacher.php?teacherID='.$row['username'].'">
+                        <button class="button buttonGreen">View Profile</button>
+                    </a>
                 </div>
             </div>
         ';
